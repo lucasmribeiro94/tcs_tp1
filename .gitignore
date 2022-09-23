@@ -1,0 +1,10 @@
+# unit
+*.out
+
+# gcov
+*.o
+cov*
+*.dSYM
+*.gcda
+*.gcno
+*.gcov
