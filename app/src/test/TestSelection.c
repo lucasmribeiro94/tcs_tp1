@@ -39,7 +39,7 @@ TEST(Selection, TestSelectionSucesso1)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "On2", SELECTION);
+  status = sort(arr, SMALL, (char *)"On2", SELECTION);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(sSorted, arr, SMALL);
@@ -51,7 +51,7 @@ TEST(Selection, TestSelectionSucesso2)
   len = sizeof(int) * MEDIUM;
   arr = (int *)malloc(len); 
   memcpy(arr, mUnsorted, len);
-  status = sort(arr, MEDIUM, "On2", SELECTION);
+  status = sort(arr, MEDIUM, (char *)"On2", SELECTION);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(mSorted, arr, MEDIUM);
@@ -63,7 +63,7 @@ TEST(Selection, TestSelectionSucesso3)
   len = sizeof(int) * LARGE;
   arr = (int *)malloc(len); 
   memcpy(arr, lUnsorted, len);
-  status = sort(arr, LARGE, "On2", SELECTION);
+  status = sort(arr, LARGE, (char *)"On2", SELECTION);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(lSorted, arr, LARGE);
@@ -75,7 +75,7 @@ TEST(Selection, TestSelectionTamanhoFalha1)
   len = sizeof(int) * TINY;
   arr = (int *)malloc(len); 
   memcpy(arr, tSorted, len);
-  status = sort(arr, TINY, "On2", SELECTION);
+  status = sort(arr, TINY, (char *)"On2", SELECTION);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -86,7 +86,7 @@ TEST(Selection, TestSelectionTamanhoFalha2)
   len = sizeof(int) * XLARGE;
   arr = (int *)malloc(len); 
   memcpy(arr, xlSorted, len);
-  status = sort(arr, XLARGE, "On2", SELECTION);
+  status = sort(arr, XLARGE, (char *)"On2", SELECTION);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -97,7 +97,7 @@ TEST(Selection, TestSelectionTamanhoFalha3)
   len = sizeof(int) * XXLARGE;
   arr = (int *)malloc(len); 
   memcpy(arr, xxlSorted, len);
-  status = sort(arr, XXLARGE, "On2", SELECTION);
+  status = sort(arr, XXLARGE, (char *)"On2", SELECTION);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -108,7 +108,7 @@ TEST(Selection, TestSelectionTipoFalha1)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "on2", SELECTION);
+  status = sort(arr, SMALL, (char *)"on2", SELECTION);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -119,7 +119,7 @@ TEST(Selection, TestSelectionTipoFalha2)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "ON2", SELECTION);
+  status = sort(arr, SMALL, (char *)"ON2", SELECTION);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -130,7 +130,7 @@ TEST(Selection, TestSelectionTipoFalha3)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, " On2 ", SELECTION);
+  status = sort(arr, SMALL, (char *)" On2 ", SELECTION);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -141,7 +141,7 @@ TEST(Selection, TestSelectionTipoFalha4)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "on2", SELECTION);
+  status = sort(arr, SMALL, (char *)"on2", SELECTION);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -152,7 +152,7 @@ TEST(Selection, TestSelectionTipoFalha5)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "On", SELECTION);
+  status = sort(arr, SMALL, (char *)"On", SELECTION);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -163,7 +163,7 @@ TEST(Selection, TestSelectionTipoFalha6)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "Onlogn", SELECTION);
+  status = sort(arr, SMALL, (char *)"Onlogn", SELECTION);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);

@@ -39,7 +39,7 @@ TEST(Quick, TestQuickSucesso1)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "Onlogn", QUICK);
+  status = sort(arr, SMALL, (char *)"Onlogn", QUICK);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(sSorted, arr, SMALL);
@@ -51,7 +51,7 @@ TEST(Quick, TestQuickSucesso2)
   len = sizeof(int) * MEDIUM;
   arr = (int *)malloc(len); 
   memcpy(arr, mUnsorted, len);
-  status = sort(arr, MEDIUM, "Onlogn", QUICK);
+  status = sort(arr, MEDIUM, (char *)"Onlogn", QUICK);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(mSorted, arr, MEDIUM);
@@ -63,7 +63,7 @@ TEST(Quick, TestQuickSucesso3)
   len = sizeof(int) * LARGE;
   arr = (int *)malloc(len); 
   memcpy(arr, lUnsorted, len);
-  status = sort(arr, LARGE, "Onlogn", QUICK);
+  status = sort(arr, LARGE, (char *)"Onlogn", QUICK);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(lSorted, arr, LARGE);
@@ -75,7 +75,7 @@ TEST(Quick, TestQuickTamanhoFalha1)
   len = sizeof(int) * TINY;
   arr = (int *)malloc(len); 
   memcpy(arr, tSorted, len);
-  status = sort(arr, TINY, "Onlogn", QUICK);
+  status = sort(arr, TINY, (char *)"Onlogn", QUICK);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -86,7 +86,7 @@ TEST(Quick, TestQuickTamanhoFalha2)
   len = sizeof(int) * XLARGE;
   arr = (int *)malloc(len); 
   memcpy(arr, xlSorted, len);
-  status = sort(arr, XLARGE, "Onlogn", QUICK);
+  status = sort(arr, XLARGE, (char *)"Onlogn", QUICK);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -97,7 +97,7 @@ TEST(Quick, TestQuickTamanhoFalha3)
   len = sizeof(int) * XXLARGE;
   arr = (int *)malloc(len); 
   memcpy(arr, xxlSorted, len);
-  status = sort(arr, XXLARGE, "Onlogn", QUICK);
+  status = sort(arr, XXLARGE, (char *)"Onlogn", QUICK);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -108,7 +108,7 @@ TEST(Quick, TestQuickTipoFalha1)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "onlogn", QUICK);
+  status = sort(arr, SMALL, (char *)"onlogn", QUICK);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -119,7 +119,7 @@ TEST(Quick, TestQuickTipoFalha2)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "ONLOGN", QUICK);
+  status = sort(arr, SMALL, (char *)"ONLOGN", QUICK);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -130,7 +130,7 @@ TEST(Quick, TestQuickTipoFalha3)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, " Onlogn ", QUICK);
+  status = sort(arr, SMALL, (char *)" Onlogn ", QUICK);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -141,7 +141,7 @@ TEST(Quick, TestQuickTipoFalha4)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, " onlogn ", QUICK);
+  status = sort(arr, SMALL, (char *)" onlogn ", QUICK);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -152,7 +152,7 @@ TEST(Quick, TestQuickTipoFalha5)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "On", QUICK);
+  status = sort(arr, SMALL, (char *)"On", QUICK);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -163,7 +163,7 @@ TEST(Quick, TestQuickTipoFalha6)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "On2", QUICK);
+  status = sort(arr, SMALL, (char *)"On2", QUICK);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);

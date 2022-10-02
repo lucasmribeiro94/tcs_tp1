@@ -39,7 +39,7 @@ TEST(Merge, TestMergeSucesso1)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "Onlogn", MERGE);
+  status = sort(arr, SMALL, (char *)"Onlogn", MERGE);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(sSorted, arr, SMALL);
@@ -51,7 +51,7 @@ TEST(Merge, TestMergeSucesso2)
   len = sizeof(int) * MEDIUM;
   arr = (int *)malloc(len); 
   memcpy(arr, mUnsorted, len);
-  status = sort(arr, MEDIUM, "Onlogn", MERGE);
+  status = sort(arr, MEDIUM, (char *)"Onlogn", MERGE);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(mSorted, arr, MEDIUM);
@@ -63,7 +63,7 @@ TEST(Merge, TestMergeSucesso3)
   len = sizeof(int) * LARGE;
   arr = (int *)malloc(len); 
   memcpy(arr, lUnsorted, len);
-  status = sort(arr, LARGE, "Onlogn", MERGE);
+  status = sort(arr, LARGE, (char *)"Onlogn", MERGE);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(lSorted, arr, LARGE);
@@ -75,7 +75,7 @@ TEST(Merge, TestMergeTamanhoFalha1)
   len = sizeof(int) * TINY;
   arr = (int *)malloc(len); 
   memcpy(arr, tSorted, len);
-  status = sort(arr, TINY, "Onlogn", MERGE);
+  status = sort(arr, TINY, (char *)"Onlogn", MERGE);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -86,7 +86,7 @@ TEST(Merge, TestMergeTamanhoFalha2)
   len = sizeof(int) * XLARGE;
   arr = (int *)malloc(len); 
   memcpy(arr, xlSorted, len);
-  status = sort(arr, XLARGE, "Onlogn", MERGE);
+  status = sort(arr, XLARGE, (char *)"Onlogn", MERGE);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -97,7 +97,7 @@ TEST(Merge, TestMergeTamanhoFalha3)
   len = sizeof(int) * XXLARGE;
   arr = (int *)malloc(len); 
   memcpy(arr, xxlSorted, len);
-  status = sort(arr, XXLARGE, "Onlogn", MERGE);
+  status = sort(arr, XXLARGE, (char *)"Onlogn", MERGE);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -108,7 +108,7 @@ TEST(Merge, TestMergeTipoFalha1)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "onlogn", MERGE);
+  status = sort(arr, SMALL, (char *)"onlogn", MERGE);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -119,7 +119,7 @@ TEST(Merge, TestMergeTipoFalha2)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "ONLOGN", MERGE);
+  status = sort(arr, SMALL, (char *)"ONLOGN", MERGE);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -130,7 +130,7 @@ TEST(Merge, TestMergeTipoFalha3)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, " Onlogn ", MERGE);
+  status = sort(arr, SMALL, (char *)" Onlogn ", MERGE);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -141,7 +141,7 @@ TEST(Merge, TestMergeTipoFalha5)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "On", MERGE);
+  status = sort(arr, SMALL, (char *)"On", MERGE);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -152,7 +152,7 @@ TEST(Merge, TestMergeTipoFalha6)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "On2", MERGE);
+  status = sort(arr, SMALL, (char *)"On2", MERGE);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);

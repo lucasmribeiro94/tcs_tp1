@@ -23,7 +23,7 @@ TEST(Algorithms, TestAlgorithmsSucesso1)
   len = sizeof(int) * ARRAY_SIZE;
   arr = (int *)malloc(len);
   memcpy(arr, uArray, len);
-  status = sort(arr, ARRAY_SIZE, "On", COUNTING);
+  status = sort(arr, ARRAY_SIZE, (char *)"On", COUNTING);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(sArray, arr, ARRAY_SIZE);
@@ -35,7 +35,7 @@ TEST(Algorithms, TestAlgorithmsSucesso2)
   len = sizeof(int) * ARRAY_SIZE;
   arr = (int *)malloc(len);
   memcpy(arr, uArray, len);
-  status = sort(arr, ARRAY_SIZE, "On", RADIX);
+  status = sort(arr, ARRAY_SIZE, (char *)"On", RADIX);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(sArray, arr, ARRAY_SIZE);
@@ -48,7 +48,7 @@ TEST(Algorithms, TestAlgorithmsSucesso3)
   arr = (int *)malloc(len);
   memcpy(arr, uArray, len);
 
-  status = sort(arr, ARRAY_SIZE, "On2", BUBBLE);
+  status = sort(arr, ARRAY_SIZE, (char *)"On2", BUBBLE);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(sArray, arr, ARRAY_SIZE);
@@ -61,7 +61,7 @@ TEST(Algorithms, TestAlgorithmsSucesso4)
   arr = (int *)malloc(len);
   memcpy(arr, uArray, len);
 
-  status = sort(arr, ARRAY_SIZE, "On2", INSERTION);
+  status = sort(arr, ARRAY_SIZE, (char *)"On2", INSERTION);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(sArray, arr, ARRAY_SIZE);
@@ -74,7 +74,7 @@ TEST(Algorithms, TestAlgorithmsSucesso5)
   arr = (int *)malloc(len);
   memcpy(arr, uArray, len);
 
-  status = sort(arr, ARRAY_SIZE, "On2", SELECTION);
+  status = sort(arr, ARRAY_SIZE, (char *)"On2", SELECTION);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(sArray, arr, ARRAY_SIZE);
@@ -87,7 +87,7 @@ TEST(Algorithms, TestAlgorithmsSucesso6)
   arr = (int *)malloc(len);
   memcpy(arr, uArray, len);
 
-  status = sort(arr, ARRAY_SIZE, "Onlogn", HEAP);
+  status = sort(arr, ARRAY_SIZE, (char *)"Onlogn", HEAP);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(sArray, arr, ARRAY_SIZE);
@@ -100,7 +100,7 @@ TEST(Algorithms, TestAlgorithmsSucesso7)
   arr = (int *)malloc(len);
   memcpy(arr, uArray, len);
 
-  status = sort(arr, ARRAY_SIZE, "Onlogn", MERGE);
+  status = sort(arr, ARRAY_SIZE, (char *)"Onlogn", MERGE);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(sArray, arr, ARRAY_SIZE);
@@ -113,7 +113,7 @@ TEST(Algorithms, TestAlgorithmsSucesso8)
   arr = (int *)malloc(len);
   memcpy(arr, uArray, len);
 
-  status = sort(arr, ARRAY_SIZE, "Onlogn", QUICK);
+  status = sort(arr, ARRAY_SIZE, (char *)"Onlogn", QUICK);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(sArray, arr, ARRAY_SIZE);
@@ -126,7 +126,7 @@ TEST(Algorithms, TestAlgorithmsFalha1)
   arr = (int *)malloc(len);
   memcpy(arr, uArray, len);
   
-  status = sort(arr, ARRAY_SIZE, "Onlogn", -1);
+  status = sort(arr, ARRAY_SIZE, (char *)"Onlogn", -1);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -138,7 +138,7 @@ TEST(Algorithms, TestAlgorithmsFalha2)
   arr = (int *)malloc(len);
   memcpy(arr, uArray, len);
 
-  status = sort(arr, ARRAY_SIZE, "Onlogn", 0);
+  status = sort(arr, ARRAY_SIZE, (char *)"Onlogn", 0);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -150,7 +150,7 @@ TEST(Algorithms, TestAlgorithmsFalha3)
   arr = (int *)malloc(len);
   memcpy(arr, uArray, len);
 
-  status = sort(arr, ARRAY_SIZE, "Onlogn", 8);
+  status = sort(arr, ARRAY_SIZE, (char *)"Onlogn", 8);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -162,7 +162,7 @@ TEST(Algorithms, TestAlgorithmsFalha4)
   arr = (int *)malloc(len);
   memcpy(arr, uArray, len);
 
-  status = sort(arr, ARRAY_SIZE, "Onlogn", 9);
+  status = sort(arr, ARRAY_SIZE, (char *)"Onlogn", 9);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);

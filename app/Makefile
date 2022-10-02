@@ -58,6 +58,7 @@ UNIT_CFLAGS+= -Wno-unknown-pragmas
 UNIT_CFLAGS+= -Wstrict-prototypes
 UNIT_CFLAGS+= -Wundef
 UNIT_CFLAGS+= -Wold-style-definition
+UNIT_CFLAGS+= -Wdiscarded-qualifiers
 
 UNIT_TARGET_BASE=all_tests
 UNIT_TARGET = $(UNIT_TARGET_BASE)$(TARGET_EXTENSION)
@@ -77,7 +78,7 @@ CALLGRIND_ARGS=--tool=callgrind
 MASSIF_ARGS=--tool=massif
 MEMCHECK_ARGS=--leak-check=full --show-leak-kinds=all
 
-idx: clean compile run
+manual_test: clean compile run
 
 compile:
 	$(GCC_COMPILER) -g -Wall -Wfatal-errors $(SRC_FILES) index.c -o index.o

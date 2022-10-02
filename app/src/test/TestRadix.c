@@ -39,7 +39,7 @@ TEST(Radix, TestRadixSucesso1)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "On", RADIX);
+  status = sort(arr, SMALL, (char *)"On", RADIX);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(sSorted, arr, SMALL);
@@ -51,7 +51,7 @@ TEST(Radix, TestRadixSucesso2)
   len = sizeof(int) * MEDIUM;
   arr = (int *)malloc(len); 
   memcpy(arr, mUnsorted, len);
-  status = sort(arr, MEDIUM, "On", RADIX);
+  status = sort(arr, MEDIUM, (char *)"On", RADIX);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(mSorted, arr, MEDIUM);
@@ -63,7 +63,7 @@ TEST(Radix, TestRadixSucesso3)
   len = sizeof(int) * LARGE;
   arr = (int *)malloc(len); 
   memcpy(arr, lUnsorted, len);
-  status = sort(arr, LARGE, "On", RADIX);
+  status = sort(arr, LARGE, (char *)"On", RADIX);
   
   TEST_ASSERT_EQUAL(0, status);
   TEST_ASSERT_EQUAL_INT32_ARRAY(lSorted, arr, LARGE);
@@ -75,7 +75,7 @@ TEST(Radix, TestRadixTamanhoFalha1)
   len = sizeof(int) * TINY;
   arr = (int *)malloc(len); 
   memcpy(arr, tSorted, len);
-  status = sort(arr, TINY, "On", RADIX);
+  status = sort(arr, TINY, (char *)"On", RADIX);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -86,7 +86,7 @@ TEST(Radix, TestRadixTamanhoFalha2)
   len = sizeof(int) * XLARGE;
   arr = (int *)malloc(len); 
   memcpy(arr, xlSorted, len);
-  status = sort(arr, XLARGE, "On", RADIX);
+  status = sort(arr, XLARGE, (char *)"On", RADIX);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -97,7 +97,7 @@ TEST(Radix, TestRadixTamanhoFalha3)
   len = sizeof(int) * XXLARGE;
   arr = (int *)malloc(len); 
   memcpy(arr, xxlSorted, len);
-  status = sort(arr, XXLARGE, "On", RADIX);
+  status = sort(arr, XXLARGE, (char *)"On", RADIX);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -108,7 +108,7 @@ TEST(Radix, TestRadixTipoFalha1)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "on", RADIX);
+  status = sort(arr, SMALL, (char *)"on", RADIX);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -119,7 +119,7 @@ TEST(Radix, TestRadixTipoFalha2)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "ON", RADIX);
+  status = sort(arr, SMALL, (char *)"ON", RADIX);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -130,7 +130,7 @@ TEST(Radix, TestRadixTipoFalha3)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, " ON ", RADIX);
+  status = sort(arr, SMALL, (char *)" ON ", RADIX);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -141,7 +141,7 @@ TEST(Radix, TestRadixTipoFalha4)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "on", RADIX);
+  status = sort(arr, SMALL, (char *)"on", RADIX);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -152,7 +152,7 @@ TEST(Radix, TestRadixTipoFalha5)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "On2", RADIX);
+  status = sort(arr, SMALL, (char *)"On2", RADIX);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);
@@ -163,7 +163,7 @@ TEST(Radix, TestRadixTipoFalha6)
   len = sizeof(int) * SMALL;
   arr = (int *)malloc(len); 
   memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, "Onlogn", RADIX);
+  status = sort(arr, SMALL, (char *)"Onlogn", RADIX);
   
   TEST_ASSERT_EQUAL(1, status);
   free(arr);

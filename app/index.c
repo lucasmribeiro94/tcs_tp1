@@ -28,13 +28,37 @@ void print_array(int* a, int length){
 
 int main(void)
 {
-  int len = sizeof(int) * MEDIUM;
-  int *arr = (int *)malloc(len); 
+  int *arr, len, status;
+
+  printf("\nMerge Sort\n");
+  len = sizeof(int) * SMALL;
+  arr = (int *)malloc(len); 
+  memcpy(arr, sUnsorted, len);
+  print_array(arr, SMALL);
+  status = sort(arr, SMALL, "Onlogn", MERGE);
+  printf("status: %s\n", (status == 0) && (memcmp(arr,sSorted, len) == 0) ? "success" : "fail");
+  print_array(arr, SMALL);
+  free(arr);
+
+  printf("\nInsertion Sort\n");
+  len = sizeof(int) * MEDIUM;
+  arr = (int *)malloc(len); 
   memcpy(arr, mUnsorted, len);
   print_array(arr, MEDIUM);
-  int status = sort(arr, MEDIUM, "On2", BUBBLE);
-  printf("\n%s\n", status == 0 ? "sucesso" : "falha");
+  status = sort(arr, MEDIUM, "On2", INSERTION);
+  printf("status: %s\n", (status == 0) && (memcmp(arr, mSorted, len) == 0) ? "success" : "fail");
   print_array(arr, MEDIUM);
   free(arr);
+
+  printf("\nRadix Sort\n");
+  len = sizeof(int) * LARGE;
+  arr = (int *)malloc(len); 
+  memcpy(arr, lUnsorted, len);
+  print_array(arr, LARGE);
+  status = sort(arr, LARGE, "On", RADIX);
+  printf("status: %s\n", (status == 0) && (memcmp(arr, lSorted, len) == 0) ? "success" : "fail");
+  print_array(arr, LARGE);
+  free(arr);
+
   return EXIT_SUCCESS;
 }
