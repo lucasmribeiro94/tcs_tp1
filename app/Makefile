@@ -68,27 +68,47 @@ UNIT_SRC_FILES=\
 INC_DIRS=-Isrc -I$(UNITY_ROOT)/src -I$(UNITY_ROOT)/extras/fixture/src
 SYMBOLS=
 
+CACHEGRIND_ARGS=--tool=cachegrind
+CALLGRIND_ARGS=--tool=callgrind
+MASSIF_ARGS=--tool=massif
+MEMCHECK_ARGS=--leak-check=full --show-leak-kinds=all
+
 # UNIT TESTS
 unit: clean unit_compile unit_run
 gcov: clean unit_compile gcov_run
 # VALGRIND
-cachegrind: clean
-callgrind: clean
-massif: clean
-memcheck: clean
+cachegrind: clean valgrind_compile cachegrind_run
+callgrind: clean valgrind_compile callgrind_run
+massif: clean valgrind_compile massif_run
+memcheck: clean valgrind_compile memcheck_run
 
 # SANITIZER
 address_sanitizer: clean address_compile sanitizer_run
 memory_sanitizer: clean memory_compile sanitizer_run
 
 unit_compile:
-	$(C_COMPILER) $(UNIT_CFLAGS) $(INC_DIRS) $(SYMBOLS) $(UNIT_SRC_FILES) -o $(UNIT_TARGET)
+	$(GCC_COMPILER) $(UNIT_CFLAGS) $(INC_DIRS) $(SYMBOLS) $(UNIT_SRC_FILES) -o $(UNIT_TARGET)
 
 unit_run:
 	./$(UNIT_TARGET) -v
 
 gcov_run:
 	gcov -b $(SRC_FILES)
+
+valgrind_compile:
+	$(GCC_COMPILER) -g -Wall -Wfatal-errors $(SRC_FILES) $(MAIN_FILE) -o $(MAIN_OUTPUT)
+
+cachegrind_run:
+	valgrind $(CACHEGRIND_ARGS) ./$(MAIN_OUTPUT)
+
+callgrind_run:
+	valgrind $(CALLGRIND_ARGS) ./$(MAIN_OUTPUT)
+
+massif_run:
+	valgrind $(MASSIF_ARGS) ./$(MAIN_OUTPUT)
+
+memcheck_run:
+	valgrind $(MEMCHECK_ARGS) ./$(MAIN_OUTPUT)
 
 address_compile:
 	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=address $(SRC_FILES) $(MAIN_FILE) -o $(MAIN_OUTPUT)
@@ -100,4 +120,4 @@ sanitizer_run:
 	./$(MAIN_OUTPUT)
 
 clean:
-	rm -rf *.out *.o cov* *.dSYM *.gcda *.gcno *.gcov
+	rm -rf *.out *.o cov* *.dSYM *.gcda *.gcno *.gcov cachegrind* callgrind* massif*

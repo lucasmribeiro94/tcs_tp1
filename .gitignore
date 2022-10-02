@@ -8,3 +8,8 @@ cov*
 *.gcda
 *.gcno
 *.gcov
+
+# valgrind
+cachegrind*
+callgrind*
+massif*

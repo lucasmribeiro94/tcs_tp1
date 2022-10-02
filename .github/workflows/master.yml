@@ -15,5 +15,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: cppcheck
       run: "sh build/01_cppcheck.sh"
+    - name: valgrind
+      run: "sh build/04_valgrind.sh"
     - name: sanitizer
       run: "sh build/05_sanitizer.sh"
