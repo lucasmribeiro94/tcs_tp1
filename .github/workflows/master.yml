@@ -15,3 +15,5 @@ jobs:
     - uses: actions/checkout@v3
     - name: cppcheck
       run: "sh build/01_cppcheck.sh"
+    - name: sanitizer
+      run: "sh build/05_sanitizer.sh"
