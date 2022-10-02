@@ -1,8 +1,10 @@
 #!/bin/bash
 
-echo "RUNNING CPPCHECK STEP"
+echo "Starting cppcheck step"
 APP_FOLDER=./app
 
+echo "Installing cppcheck"
 sudo dpkg --get-selections | grep cppcheck || sudo apt update && sudo apt install -y cppcheck
-# TODO: enable cppcheck verification
-# cppcheck --enable=all --suppress=missingIncludeSystem $APP_FOLDER/src/ -i $APP_FOLDER/src/test*
+
+echo "Running cppcheck"
+cppcheck --enable=all --suppress=missingIncludeSystem $APP_FOLDER/src/ -i $APP_FOLDER/src/test*
