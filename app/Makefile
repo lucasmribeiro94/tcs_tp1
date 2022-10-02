@@ -31,6 +31,7 @@ MAIN_FILE=main.c
 MAIN_OUTPUT=main.o
 
 TEST_FILES=src/test/test_runners/all_tests.c
+TEST_FILES+= src/test/TestAlgorithms.c src/test/test_runners/TestAlgorithms_Runner.c
 TEST_FILES+= src/test/TestBubble.c src/test/test_runners/TestBubble_Runner.c
 TEST_FILES+= src/test/TestCounting.c src/test/test_runners/TestCounting_Runner.c
 TEST_FILES+= src/test/TestHeap.c src/test/test_runners/TestHeap_Runner.c
@@ -68,20 +69,30 @@ UNIT_SRC_FILES=\
 INC_DIRS=-Isrc -I$(UNITY_ROOT)/src -I$(UNITY_ROOT)/extras/fixture/src
 SYMBOLS=
 
+GCOV_CFLAGS=-fprofile-arcs
+GCOV_CFLAGS+= -ftest-coverage
+
 CACHEGRIND_ARGS=--tool=cachegrind
 CALLGRIND_ARGS=--tool=callgrind
 MASSIF_ARGS=--tool=massif
 MEMCHECK_ARGS=--leak-check=full --show-leak-kinds=all
 
+idx: clean compile run
+
+compile:
+	$(GCC_COMPILER) -g -Wall -Wfatal-errors $(SRC_FILES) index.c -o index.o
+
+run: 
+	./index.o
+
 # UNIT TESTS
 unit: clean unit_compile unit_run
-gcov: clean unit_compile gcov_run
+gcov: clean gcov_compile gcov_execute gcov_run
 # VALGRIND
 cachegrind: clean valgrind_compile cachegrind_run
 callgrind: clean valgrind_compile callgrind_run
 massif: clean valgrind_compile massif_run
 memcheck: clean valgrind_compile memcheck_run
-
 # SANITIZER
 address_sanitizer: clean address_compile sanitizer_run
 memory_sanitizer: clean memory_compile sanitizer_run
@@ -92,8 +103,14 @@ unit_compile:
 unit_run:
 	./$(UNIT_TARGET) -v
 
+gcov_compile:
+	$(GCC_COMPILER) $(UNIT_CFLAGS) $(GCOV_CFLAGS) $(INC_DIRS) $(SYMBOLS) $(UNIT_SRC_FILES) -o $(UNIT_TARGET)
+
+gcov_execute:
+	./$(UNIT_TARGET) -v
+
 gcov_run:
-	gcov -b $(SRC_FILES)
+	gcov -b sort.c
 
 valgrind_compile:
 	$(GCC_COMPILER) -g -Wall -Wfatal-errors $(SRC_FILES) $(MAIN_FILE) -o $(MAIN_OUTPUT)
