@@ -10,6 +10,7 @@ static void RunAllTests(void)
   RUN_TEST_GROUP(Quick);
   RUN_TEST_GROUP(Radix);
   RUN_TEST_GROUP(Selection);
+  RUN_TEST_GROUP(Sort);
 }
 
 int main(int argc, const char * argv[])

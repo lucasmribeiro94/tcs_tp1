@@ -47,6 +47,7 @@ TEST_FILES+= src/test/TestMerge.c src/test/test_runners/TestMerge_Runner.c
 TEST_FILES+= src/test/TestQuick.c src/test/test_runners/TestQuick_Runner.c
 TEST_FILES+= src/test/TestRadix.c src/test/test_runners/TestRadix_Runner.c
 TEST_FILES+= src/test/TestSelection.c src/test/test_runners/TestSelection_Runner.c
+TEST_FILES+= src/test/TestSort.c src/test/test_runners/TestSort_Runner.c
 
 # UNIT
 UNITY_ROOT=../unit
