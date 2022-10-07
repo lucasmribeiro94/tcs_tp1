@@ -10,9 +10,9 @@ echo "Running AddressSanitizer"
 make address_counting
 make sanitizer_run
 
-echo "Removing compiled files"
-make clean
+# echo "Removing compiled files"
+# make clean
 
-echo "Running MemorySanitizer"
-make memory_counting
-make sanitizer_run
+# echo "Running MemorySanitizer"
+# make memory_counting
+# make sanitizer_run

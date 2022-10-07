@@ -9,14 +9,14 @@ make clean
 echo "Radix Sort"
 make valgrind_radix
 
-echo "Running Cachegrind analyzer"
-make cachegrind
+# echo "Running Cachegrind analyzer"
+# make cachegrind
 
-echo "Running Callgrind analyzer"
-make callgrind
+# echo "Running Callgrind analyzer"
+# make callgrind
 
-echo "Running Massif analyzer"
-make massif
+# echo "Running Massif analyzer"
+# make massif
 
 echo "Running Memcheck analyzer"
 make memcheck

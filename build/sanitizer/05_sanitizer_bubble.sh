@@ -10,9 +10,9 @@ echo "Running AddressSanitizer"
 make address_bubble
 make sanitizer_run
 
-echo "Removing compiled files"
-make clean
+# echo "Removing compiled files"
+# make clean
 
-echo "Running MemorySanitizer"
-make memory_bubble
-make sanitizer_run
+# echo "Running MemorySanitizer"
+# make memory_bubble
+# make sanitizer_run
