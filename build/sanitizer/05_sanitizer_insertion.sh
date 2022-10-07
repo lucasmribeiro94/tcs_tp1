@@ -13,6 +13,6 @@ make sanitizer_run
 # echo "Removing compiled files"
 # make clean
 
-# echo "Running MemorySanitizer"
-# make memory_insertion
-# make sanitizer_run
+echo "Running MemorySanitizer"
+make memory_insertion
+make sanitizer_run
