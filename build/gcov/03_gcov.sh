@@ -29,3 +29,6 @@ make gcov_radix
 
 echo "Selection coverage"
 make gcov_selection
+
+echo "Sort coverage"
+make gcov_sort

@@ -127,6 +127,8 @@ gcov_radix:
 	gcov -b radix_sort.c
 gcov_selection:
 	gcov -b selection_sort.c
+gcov_sort:
+	gcov -b sort.c
 
 # VALGRIND
 valgrind_bubble:
