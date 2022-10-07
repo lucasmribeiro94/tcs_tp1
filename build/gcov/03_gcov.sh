@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo "Gcov step"
 APP_FOLDER=./app
 cd $APP_FOLDER

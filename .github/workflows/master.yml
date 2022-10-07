@@ -14,44 +14,44 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: cppcheck
-      run: "sh build/01_cppcheck.sh"
+      run: "sh build/cppcheck/01_cppcheck.sh"
     - name: unit
-      run: "sh build/02_unit.sh"
+      run: "sh build/unit/02_unit.sh"
     - name: gcov
-      run: "sh build/03_gcov.sh"
+      run: "sh build/gcov/03_gcov.sh"
     - name: valgrind
-      run: "sh build/04_valgrind.sh"
+      run: "sh build/valgrind/04_valgrind.sh"
     - name: valgrind-bubble
-      run: "sh build/04_valgrind_bubble.sh"
+      run: "sh build/valgrind/04_valgrind_bubble.sh"
     - name: valgrind-counting
-      run: "sh build/04_valgrind_counting.sh"
+      run: "sh build/valgrind/04_valgrind_counting.sh"
     - name: valgrind-heap
-      run: "sh build/04_valgrind_heap.sh"
+      run: "sh build/valgrind/04_valgrind_heap.sh"
     - name: valgrind-insertion
-      run: "sh build/04_valgrind_insertion.sh"
+      run: "sh build/valgrind/04_valgrind_insertion.sh"
     - name: valgrind-merge
-      run: "sh build/04_valgrind_merge.sh"
+      run: "sh build/valgrind/04_valgrind_merge.sh"
     - name: valgrind-quick
-      run: "sh build/04_valgrind_quick.sh"
+      run: "sh build/valgrind/04_valgrind_quick.sh"
     - name: valgrind-radix
-      run: "sh build/04_valgrind_radix.sh"
+      run: "sh build/valgrind/04_valgrind_radix.sh"
     - name: valgrind-selection
-      run: "sh build/04_valgrind_selection.sh"
+      run: "sh build/valgrind/04_valgrind_selection.sh"
     - name: sanitizer
-      run: "sh build/05_sanitizer.sh"
-    - name: sanitizer
-      run: "sh build/05_sanitizer_bubble.sh"
-    - name: sanitizer
-      run: "sh build/05_sanitizer_counting.sh"
-    - name: sanitizer
-      run: "sh build/05_sanitizer_heap.sh"
-    - name: sanitizer
-      run: "sh build/05_sanitizer_insertion.sh"
-    - name: sanitizer
-      run: "sh build/05_sanitizer_merge.sh"
-    - name: sanitizer
-      run: "sh build/05_sanitizer_quick.sh"
-    - name: sanitizer
-      run: "sh build/05_sanitizer_radix.sh"
-    - name: sanitizer
-      run: "sh build/05_sanitizer_selection.sh"
+      run: "sh build/sanitizer/05_sanitizer.sh"
+    - name: sanitizer-bubble
+      run: "sh build/sanitizer/05_sanitizer_bubble.sh"
+    - name: sanitizer-counting
+      run: "sh build/sanitizer/05_sanitizer_counting.sh"
+    - name: sanitizer-heap
+      run: "sh build/sanitizer/05_sanitizer_heap.sh"
+    - name: sanitizer-insertion
+      run: "sh build/sanitizer/05_sanitizer_insertion.sh"
+    - name: sanitizer-merge
+      run: "sh build/sanitizer/05_sanitizer_merge.sh"
+    - name: sanitizer-quick
+      run: "sh build/sanitizer/05_sanitizer_quick.sh"
+    - name: sanitizer-radix
+      run: "sh build/sanitizer/05_sanitizer_radix.sh"
+    - name: sanitizer-radix
+      run: "sh build/sanitizer/05_sanitizer_selection.sh"
