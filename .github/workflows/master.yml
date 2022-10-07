@@ -21,5 +21,37 @@ jobs:
       run: "sh build/03_gcov.sh"
     - name: valgrind
       run: "sh build/04_valgrind.sh"
+    - name: valgrind-bubble
+      run: "sh build/04_valgrind_bubble.sh"
+    - name: valgrind-counting
+      run: "sh build/04_valgrind_counting.sh"
+    - name: valgrind-heap
+      run: "sh build/04_valgrind_heap.sh"
+    - name: valgrind-insertion
+      run: "sh build/04_valgrind_insertion.sh"
+    - name: valgrind-merge
+      run: "sh build/04_valgrind_merge.sh"
+    - name: valgrind-quick
+      run: "sh build/04_valgrind_quick.sh"
+    - name: valgrind-radix
+      run: "sh build/04_valgrind_radix.sh"
+    - name: valgrind-selection
+      run: "sh build/04_valgrind_selection.sh"
     - name: sanitizer
       run: "sh build/05_sanitizer.sh"
+    - name: sanitizer
+      run: "sh build/05_sanitizer_bubble.sh"
+    - name: sanitizer
+      run: "sh build/05_sanitizer_counting.sh"
+    - name: sanitizer
+      run: "sh build/05_sanitizer_heap.sh"
+    - name: sanitizer
+      run: "sh build/05_sanitizer_insertion.sh"
+    - name: sanitizer
+      run: "sh build/05_sanitizer_merge.sh"
+    - name: sanitizer
+      run: "sh build/05_sanitizer_quick.sh"
+    - name: sanitizer
+      run: "sh build/05_sanitizer_radix.sh"
+    - name: sanitizer
+      run: "sh build/05_sanitizer_selection.sh"

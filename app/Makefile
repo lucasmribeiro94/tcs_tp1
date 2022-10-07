@@ -27,8 +27,16 @@ SRC_FILES+=	src/radix_sort.c
 SRC_FILES+=	src/counting_sort.c
 SRC_FILES+= src/sort.c
 
-MAIN_FILE=main.c
 MAIN_OUTPUT=main.o
+
+MAIN_BUBBLE=main_bubble.c
+MAIN_COUNTING=main_counting.c
+MAIN_HEAP=main_heap.c
+MAIN_INSERTION=main_insertion.c
+MAIN_MERGE=main_merge.c
+MAIN_QUICK=main_quick.c
+MAIN_RADIX=main_radix.c
+MAIN_SELECTION=main_selection.c
 
 TEST_FILES=src/test/test_runners/all_tests.c
 TEST_FILES+= src/test/TestBubble.c src/test/test_runners/TestBubble_Runner.c
@@ -75,74 +83,115 @@ GCOV_CFLAGS+= -ftest-coverage
 CACHEGRIND_ARGS=--tool=cachegrind
 CALLGRIND_ARGS=--tool=callgrind
 MASSIF_ARGS=--tool=massif
-MEMCHECK_ARGS=--leak-check=full --show-leak-kinds=all
+MEMCHECK_ARGS=--leak-check=full --show-leak-kinds=all --track-origins=yes
 
 manual_test: clean compile run
 
 compile:
-	$(GCC_COMPILER) -g -Wall -Wfatal-errors $(SRC_FILES) index.c -o index.o
+	$(GCC_COMPILER) -g -Wall -Wfatal-errors $(SRC_FILES) main_radix.c -o index.o
 
 run: 
 	./index.o
 
+coverage_compile:
+	$(GCC_COMPILER) $(UNIT_CFLAGS) $(GCOV_CFLAGS) $(INC_DIRS) $(SYMBOLS) $(UNIT_SRC_FILES) -o $(UNIT_TARGET)
+
 # UNIT TESTS
 unit: clean unit_compile unit_run
-gcov: clean gcov_compile gcov_execute gcov_run
-# VALGRIND
-cachegrind: clean valgrind_compile cachegrind_run
-callgrind: clean valgrind_compile callgrind_run
-massif: clean valgrind_compile massif_run
-memcheck: clean valgrind_compile memcheck_run
-# SANITIZER
-address_sanitizer: clean address_compile sanitizer_run
-memory_sanitizer: clean memory_compile sanitizer_run
-
 unit_compile:
 	$(GCC_COMPILER) $(UNIT_CFLAGS) $(INC_DIRS) $(SYMBOLS) $(UNIT_SRC_FILES) -o $(UNIT_TARGET)
-
 unit_run:
 	./$(UNIT_TARGET) -v
 
+# COVERAGE
+gcov: clean gcov_compile gcov_execute
 gcov_compile:
 	$(GCC_COMPILER) $(UNIT_CFLAGS) $(GCOV_CFLAGS) $(INC_DIRS) $(SYMBOLS) $(UNIT_SRC_FILES) -o $(UNIT_TARGET)
-
 gcov_execute:
 	./$(UNIT_TARGET) -v
 
-gcov_run:
+gcov_bubble:
 	gcov -b bubble_sort.c
+gcov_counting:
 	gcov -b counting_sort.c
+gcov_heap:
 	gcov -b heap_sort.c
+gcov_insertion:
 	gcov -b insertion_sort.c
+gcov_merge:
 	gcov -b merge_sort.c
+gcov_quick:
 	gcov -b quick_sort.c
+gcov_radix:
 	gcov -b radix_sort.c
+gcov_selection:
 	gcov -b selection_sort.c
-	gcov -b sort.c
 
-valgrind_compile:
-	$(GCC_COMPILER) -g -Wall -Wfatal-errors $(SRC_FILES) $(MAIN_FILE) -o $(MAIN_OUTPUT)
+# VALGRIND
+valgrind_bubble:
+	$(GCC_COMPILER) -g -Wall -Wfatal-errors $(SRC_FILES) $(MAIN_BUBBLE) -o $(MAIN_OUTPUT)
+valgrind_counting:
+	$(GCC_COMPILER) -g -Wall -Wfatal-errors $(SRC_FILES) $(MAIN_COUNTING) -o $(MAIN_OUTPUT)
+valgrind_heap:
+	$(GCC_COMPILER) -g -Wall -Wfatal-errors $(SRC_FILES) $(MAIN_HEAP) -o $(MAIN_OUTPUT)
+valgrind_insertion:
+	$(GCC_COMPILER) -g -Wall -Wfatal-errors $(SRC_FILES) $(MAIN_INSERTION) -o $(MAIN_OUTPUT)
+valgrind_merge:
+	$(GCC_COMPILER) -g -Wall -Wfatal-errors $(SRC_FILES) $(MAIN_MERGE) -o $(MAIN_OUTPUT)
+valgrind_quick:
+	$(GCC_COMPILER) -g -Wall -Wfatal-errors $(SRC_FILES) $(MAIN_QUICK) -o $(MAIN_OUTPUT)
+valgrind_radix:
+	$(GCC_COMPILER) -g -Wall -Wfatal-errors $(SRC_FILES) $(MAIN_RADIX) -o $(MAIN_OUTPUT)
+valgrind_selection:
+	$(GCC_COMPILER) -g -Wall -Wfatal-errors $(SRC_FILES) $(MAIN_SELECTION) -o $(MAIN_OUTPUT)
 
-cachegrind_run:
+cachegrind: 
 	valgrind $(CACHEGRIND_ARGS) ./$(MAIN_OUTPUT)
-
-callgrind_run:
+callgrind:
 	valgrind $(CALLGRIND_ARGS) ./$(MAIN_OUTPUT)
-
-massif_run:
+massif: 
 	valgrind $(MASSIF_ARGS) ./$(MAIN_OUTPUT)
-
-memcheck_run:
+memcheck:
 	valgrind $(MEMCHECK_ARGS) ./$(MAIN_OUTPUT)
 
-address_compile:
-	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=address $(SRC_FILES) $(MAIN_FILE) -o $(MAIN_OUTPUT)
+# SANITIZER
+address_bubble:
+	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=address $(SRC_FILES) $(MAIN_BUBBLE) -o $(MAIN_OUTPUT)
+address_counting:
+	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=address $(SRC_FILES) $(MAIN_COUNTING) -o $(MAIN_OUTPUT)
+address_heap:
+	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=address $(SRC_FILES) $(MAIN_HEAP) -o $(MAIN_OUTPUT)
+address_insertion:
+	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=address $(SRC_FILES) $(MAIN_INSERTION) -o $(MAIN_OUTPUT)
+address_merge:
+	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=address $(SRC_FILES) $(MAIN_MERGE) -o $(MAIN_OUTPUT)
+address_quick:
+	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=address $(SRC_FILES) $(MAIN_QUICK) -o $(MAIN_OUTPUT)
+address_radix:
+	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=address $(SRC_FILES) $(MAIN_RADIX) -o $(MAIN_OUTPUT)
+address_selection:
+	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=address $(SRC_FILES) $(MAIN_SELECTION) -o $(MAIN_OUTPUT)
 
-memory_compile:
-	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=memory $(SRC_FILES) $(MAIN_FILE) -o $(MAIN_OUTPUT)
+memory_bubble:
+	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=memory $(SRC_FILES) $(MAIN_BUBBLE) -o $(MAIN_OUTPUT)
+memory_counting:
+	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=memory $(SRC_FILES) $(MAIN_COUNTING) -o $(MAIN_OUTPUT)
+memory_heap:
+	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=memory $(SRC_FILES) $(MAIN_HEAP) -o $(MAIN_OUTPUT)
+memory_insertion:
+	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=memory $(SRC_FILES) $(MAIN_INSERTION) -o $(MAIN_OUTPUT)
+memory_merge:
+	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=memory $(SRC_FILES) $(MAIN_MERGE) -o $(MAIN_OUTPUT)
+memory_quick:
+	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=memory $(SRC_FILES) $(MAIN_QUICK) -o $(MAIN_OUTPUT)
+memory_radix:
+	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=memory $(SRC_FILES) $(MAIN_RADIX) -o $(MAIN_OUTPUT)
+memory_selection:
+	$(CLANG_COMPILER) -g -Wall -Wfatal-errors -fsanitize=memory $(SRC_FILES) $(MAIN_SELECTION) -o $(MAIN_OUTPUT)
 
 sanitizer_run:
 	./$(MAIN_OUTPUT)
 
+# DELETE FILES
 clean:
 	rm -rf *.out *.o cov* *.dSYM *.gcda *.gcno *.gcov cachegrind* callgrind* massif*

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Starting unit step"
+echo "Unit step"
 APP_FOLDER=./app
 cd $APP_FOLDER
 

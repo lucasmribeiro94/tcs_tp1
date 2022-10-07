@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Starting cppcheck step"
+echo "Cppcheck step"
 APP_FOLDER=./app
 
 echo "Installing cppcheck"
