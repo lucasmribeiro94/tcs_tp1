@@ -55,7 +55,7 @@ int sort(int* a, int length, char* type, int algorithm) {
                 if (!strcmp(type,"Onlogn"))
                     quick_sort(s, 0, length - 1);
                 else
-                    status = 0;
+                    status = 1;
                 break;
             default:
                 status = 1;
