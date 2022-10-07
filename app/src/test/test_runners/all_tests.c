@@ -2,7 +2,6 @@
 
 static void RunAllTests(void)
 {
-  RUN_TEST_GROUP(Algorithms);
   RUN_TEST_GROUP(Bubble);
   RUN_TEST_GROUP(Counting);
   RUN_TEST_GROUP(Heap);

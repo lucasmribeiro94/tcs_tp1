@@ -2,27 +2,7 @@
 #include "unity.h"
 #include "unity_fixture.h"
 
-#define TINY    1
-#define SMALL   2
-#define MEDIUM  10
-#define LARGE   20
-#define XLARGE  25
-#define XXLARGE 30
- 
-/* Unsorted arrays */
-static int sUnsorted[SMALL] = { 5, 1 };
-static int mUnsorted[MEDIUM] = { 20, 18, 16, 14, 12, 9, 7, 5, 3, 1 };
-static int lUnsorted[LARGE] = { 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5 };
-/* Sorted arrays */
-static int sSorted[SMALL] = { 1, 5 };
-static int mSorted[MEDIUM] = { 1, 3, 5, 7, 9, 12, 14, 16, 18, 20 };
-static int lSorted[LARGE] = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100 };
-/* Invalids arrays*/
-static int tSorted[TINY] = { 50 };
-static int xlSorted[XLARGE] = { 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 };
-static int xxlSorted[XXLARGE] = { 145, 140, 135, 130, 125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 };
-
-int *arr, len, status;
+int *array, len, status;
 
 TEST_GROUP(Insertion);
 
@@ -34,137 +14,240 @@ TEST_TEAR_DOWN(Insertion)
 {
 }
 
-TEST(Insertion, TestInsertionSucesso1)
+TEST(Insertion, TestInsertionArrayNull)
 {
-  len = sizeof(int) * SMALL;
-  arr = (int *)malloc(len); 
-  memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, (char *)"On2", INSERTION);
+  len = sizeof(null_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, null_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
+  
+  TEST_ASSERT_EQUAL(1, status);
+  free(array);
+}
+
+TEST(Insertion, TestInsertionArrayMaxMin)
+{
+  len = sizeof(max_min_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, max_min_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
   
   TEST_ASSERT_EQUAL(0, status);
-  TEST_ASSERT_EQUAL_INT32_ARRAY(sSorted, arr, SMALL);
-  free(arr);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(max_min_sorted, array, len);
+  free(array);
 }
 
-TEST(Insertion, TestInsertionSucesso2)
+TEST(Insertion, TestInsertionArrayMinMax)
 {
-  len = sizeof(int) * MEDIUM;
-  arr = (int *)malloc(len); 
-  memcpy(arr, mUnsorted, len);
-  status = sort(arr, MEDIUM, (char *)"On2", INSERTION);
+  len = sizeof(min_max_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, min_max_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
   
   TEST_ASSERT_EQUAL(0, status);
-  TEST_ASSERT_EQUAL_INT32_ARRAY(mSorted, arr, MEDIUM);
-  free(arr);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(min_max_sorted, array, len);
+  free(array);
 }
 
-TEST(Insertion, TestInsertionSucesso3)
+TEST(Insertion, TestInsertionArrayMaxMax)
 {
-  len = sizeof(int) * LARGE;
-  arr = (int *)malloc(len); 
-  memcpy(arr, lUnsorted, len);
-  status = sort(arr, LARGE, (char *)"On2", INSERTION);
+  len = sizeof(max_max_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, max_max_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
   
   TEST_ASSERT_EQUAL(0, status);
-  TEST_ASSERT_EQUAL_INT32_ARRAY(lSorted, arr, LARGE);
-  free(arr);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(max_max_sorted, array, len);
+  free(array);
 }
 
-TEST(Insertion, TestInsertionTamanhoFalha1)
+TEST(Insertion, TestInsertionArrayMinMin)
 {
-  len = sizeof(int) * TINY;
-  arr = (int *)malloc(len); 
-  memcpy(arr, tSorted, len);
-  status = sort(arr, TINY, (char *)"On2", INSERTION);
+  len = sizeof(min_min_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, min_min_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
   
-  TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(min_min_sorted, array, len);
+  free(array);
 }
 
-TEST(Insertion, TestInsertionTamanhoFalha2)
+TEST(Insertion, TestInsertionArrayDuplicate)
 {
-  len = sizeof(int) * XLARGE;
-  arr = (int *)malloc(len); 
-  memcpy(arr, xlSorted, len);
-  status = sort(arr, XLARGE, (char *)"On2", INSERTION);
+  len = sizeof(duplicate_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, duplicate_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
   
-  TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(duplicate_sorted, array, len);
+  free(array);
 }
 
-TEST(Insertion, TestInsertionTamanhoFalha3)
+TEST(Insertion, TestInsertionArrayOdd)
 {
-  len = sizeof(int) * XXLARGE;
-  arr = (int *)malloc(len); 
-  memcpy(arr, xxlSorted, len);
-  status = sort(arr, XXLARGE, (char *)"On2", INSERTION);
+  len = sizeof(odd_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, odd_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
   
-  TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(odd_sorted, array, len);
+  free(array);
 }
 
-TEST(Insertion, TestInsertionTipoFalha1)
+TEST(Insertion, TestInsertionArrayEven)
 {
-  len = sizeof(int) * SMALL;
-  arr = (int *)malloc(len); 
-  memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, (char *)"on2", INSERTION);
+  len = sizeof(even_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, even_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
   
-  TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(even_sorted, array, len);
+  free(array);
 }
 
-TEST(Insertion, TestInsertionTipoFalha2)
+TEST(Insertion, TestInsertionArrayNegative)
 {
-  len = sizeof(int) * SMALL;
-  arr = (int *)malloc(len); 
-  memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, (char *)"ON2", INSERTION);
+  len = sizeof(negative_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, negative_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
   
-  TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(negative_sorted, array, len);
+  free(array);
 }
 
-TEST(Insertion, TestInsertionTipoFalha3)
+TEST(Insertion, TestInsertionArrayPositive)
 {
-  len = sizeof(int) * SMALL;
-  arr = (int *)malloc(len); 
-  memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, (char *)" On2 ", INSERTION);
+  len = sizeof(positive_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, positive_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
   
-  TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(positive_sorted, array, len);
+  free(array);
 }
 
-TEST(Insertion, TestInsertionTipoFalha4)
+TEST(Insertion, TestInsertionArrayMixed)
 {
-  len = sizeof(int) * SMALL;
-  arr = (int *)malloc(len); 
-  memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, (char *)" on2 ", INSERTION);
+  len = sizeof(mixed_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, mixed_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
   
-  TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(mixed_sorted, array, len);
+  free(array);
 }
 
-TEST(Insertion, TestInsertionTipoFalha5)
+TEST(Insertion, TestInsertionArrayOne)
 {
-  len = sizeof(int) * SMALL;
-  arr = (int *)malloc(len); 
-  memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, (char *)"On", INSERTION);
+  len = sizeof(one_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, one_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
   
   TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(one_sorted, array, len);
+  free(array);
 }
 
-TEST(Insertion, TestInsertionTipoFalha6)
+TEST(Insertion, TestInsertionArrayUnsorted)
 {
-  len = sizeof(int) * SMALL;
-  arr = (int *)malloc(len); 
-  memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, (char *)"Onlogn", INSERTION);
+  len = sizeof(unsorted_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, unsorted_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
+  
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(unsorted_sorted, array, len);
+  free(array);
+}
+
+TEST(Insertion, TestInsertionArraySorted)
+{
+  len = sizeof(sorted_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, sorted_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
+  
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(sorted_sorted, array, len);
+  free(array);
+}
+
+TEST(Insertion, TestInsertionArrayAllOnes)
+{
+  len = sizeof(ones_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, ones_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
+  
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(ones_sorted, array, len);
+  free(array);
+}
+
+TEST(Insertion, TestInsertionArrayAllZeros)
+{
+  len = sizeof(zeros_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, zeros_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
+  
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(zeros_sorted, array, len);
+  free(array);
+}
+
+TEST(Insertion, TestInsertionArrayTwoZeros)
+{
+  len = sizeof(two_zeros_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, two_zeros_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
+  
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(two_zeros_sorted, array, len);
+  free(array);
+}
+
+TEST(Insertion, TestInsertionArrayTwoMax)
+{
+  len = sizeof(two_max_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, two_max_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
+  
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(two_max_sorted, array, len);
+  free(array);
+}
+
+TEST(Insertion, TestInsertionArrayTwoMin)
+{
+  len = sizeof(two_min_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, two_min_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
+  
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(two_min_sorted, array, len);
+  free(array);
+}
+
+TEST(Insertion, TestInsertionArrayLarge)
+{
+  len = sizeof(large_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, large_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On2", INSERTION);
   
   TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  free(array);
 }

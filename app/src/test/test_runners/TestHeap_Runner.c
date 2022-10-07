@@ -3,16 +3,24 @@
 
 TEST_GROUP_RUNNER(Heap)
 {
-  RUN_TEST_CASE(Heap, TestHeapSucesso1);
-  RUN_TEST_CASE(Heap, TestHeapSucesso2);
-  RUN_TEST_CASE(Heap, TestHeapSucesso3);
-  RUN_TEST_CASE(Heap, TestHeapTamanhoFalha1);
-  RUN_TEST_CASE(Heap, TestHeapTamanhoFalha2);
-  RUN_TEST_CASE(Heap, TestHeapTamanhoFalha3);
-  RUN_TEST_CASE(Heap, TestHeapTipoFalha1);
-  RUN_TEST_CASE(Heap, TestHeapTipoFalha2);
-  RUN_TEST_CASE(Heap, TestHeapTipoFalha3);
-  RUN_TEST_CASE(Heap, TestHeapTipoFalha4);
-  RUN_TEST_CASE(Heap, TestHeapTipoFalha5);
-  RUN_TEST_CASE(Heap, TestHeapTipoFalha6);
+  RUN_TEST_CASE(Heap, TestHeapArrayNull);
+  RUN_TEST_CASE(Heap, TestHeapArrayMaxMin);
+  RUN_TEST_CASE(Heap, TestHeapArrayMinMax);
+  RUN_TEST_CASE(Heap, TestHeapArrayMaxMax);
+  RUN_TEST_CASE(Heap, TestHeapArrayMinMin);
+  RUN_TEST_CASE(Heap, TestHeapArrayDuplicate);
+  RUN_TEST_CASE(Heap, TestHeapArrayOdd);
+  RUN_TEST_CASE(Heap, TestHeapArrayEven);
+  RUN_TEST_CASE(Heap, TestHeapArrayNegative);
+  RUN_TEST_CASE(Heap, TestHeapArrayPositive);
+  RUN_TEST_CASE(Heap, TestHeapArrayMixed);
+  RUN_TEST_CASE(Heap, TestHeapArrayOne);
+  RUN_TEST_CASE(Heap, TestHeapArrayUnsorted);
+  RUN_TEST_CASE(Heap, TestHeapArraySorted);
+  RUN_TEST_CASE(Heap, TestHeapArrayAllZeros);
+  RUN_TEST_CASE(Heap, TestHeapArrayAllOnes);
+  RUN_TEST_CASE(Heap, TestHeapArrayTwoZeros);
+  RUN_TEST_CASE(Heap, TestHeapArrayTwoMax);
+  RUN_TEST_CASE(Heap, TestHeapArrayTwoMin);
+  RUN_TEST_CASE(Heap, TestHeapArrayLarge);
 }

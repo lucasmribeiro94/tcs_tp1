@@ -31,7 +31,6 @@ MAIN_FILE=main.c
 MAIN_OUTPUT=main.o
 
 TEST_FILES=src/test/test_runners/all_tests.c
-TEST_FILES+= src/test/TestAlgorithms.c src/test/test_runners/TestAlgorithms_Runner.c
 TEST_FILES+= src/test/TestBubble.c src/test/test_runners/TestBubble_Runner.c
 TEST_FILES+= src/test/TestCounting.c src/test/test_runners/TestCounting_Runner.c
 TEST_FILES+= src/test/TestHeap.c src/test/test_runners/TestHeap_Runner.c
@@ -111,6 +110,14 @@ gcov_execute:
 	./$(UNIT_TARGET) -v
 
 gcov_run:
+	gcov -b bubble_sort.c
+	gcov -b counting_sort.c
+	gcov -b heap_sort.c
+	gcov -b insertion_sort.c
+	gcov -b merge_sort.c
+	gcov -b quick_sort.c
+	gcov -b radix_sort.c
+	gcov -b selection_sort.c
 	gcov -b sort.c
 
 valgrind_compile:

@@ -2,27 +2,7 @@
 #include "unity.h"
 #include "unity_fixture.h"
 
-#define TINY    1
-#define SMALL   2
-#define MEDIUM  10
-#define LARGE   20
-#define XLARGE  25
-#define XXLARGE 30
- 
-/* Unsorted arrays */
-static int sUnsorted[SMALL] = { 5, 1 };
-static int mUnsorted[MEDIUM] = { 20, 18, 16, 14, 12, 9, 7, 5, 3, 1 };
-static int lUnsorted[LARGE] = { 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5 };
-/* Sorted arrays */
-static int sSorted[SMALL] = { 1, 5 };
-static int mSorted[MEDIUM] = { 1, 3, 5, 7, 9, 12, 14, 16, 18, 20 };
-static int lSorted[LARGE] = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100 };
-/* Invalids arrays*/
-static int tSorted[TINY] = { 50 };
-static int xlSorted[XLARGE] = { 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 };
-static int xxlSorted[XXLARGE] = { 145, 140, 135, 130, 125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0 };
-
-int *arr, len, status;
+int *array, len, status;
 
 TEST_GROUP(Counting);
 
@@ -34,137 +14,240 @@ TEST_TEAR_DOWN(Counting)
 {
 }
 
-TEST(Counting, TestCountingSucesso1)
+TEST(Counting, TestCountingArrayNull)
 {
-  len = sizeof(int) * SMALL;
-  arr = (int *)malloc(len); 
-  memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, (char *)"On", COUNTING);
+  len = sizeof(null_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, null_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
+  
+  TEST_ASSERT_EQUAL(1, status);
+  free(array);
+}
+
+TEST(Counting, TestCountingArrayMaxMin)
+{
+  len = sizeof(max_min_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, max_min_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
   
   TEST_ASSERT_EQUAL(0, status);
-  TEST_ASSERT_EQUAL_INT32_ARRAY(sSorted, arr, SMALL);
-  free(arr);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(max_min_sorted, array, len);
+  free(array);
 }
 
-TEST(Counting, TestCountingSucesso2)
+TEST(Counting, TestCountingArrayMinMax)
 {
-  len = sizeof(int) * MEDIUM;
-  arr = (int *)malloc(len); 
-  memcpy(arr, mUnsorted, len);
-  status = sort(arr, MEDIUM, (char *)"On", COUNTING);
+  len = sizeof(min_max_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, min_max_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
   
   TEST_ASSERT_EQUAL(0, status);
-  TEST_ASSERT_EQUAL_INT32_ARRAY(mSorted, arr, MEDIUM);
-  free(arr);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(min_max_sorted, array, len);
+  free(array);
 }
 
-TEST(Counting, TestCountingSucesso3)
+TEST(Counting, TestCountingArrayMaxMax)
 {
-  len = sizeof(int) * LARGE;
-  arr = (int *)malloc(len); 
-  memcpy(arr, lUnsorted, len);
-  status = sort(arr, LARGE, (char *)"On", COUNTING);
+  len = sizeof(max_max_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, max_max_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
   
   TEST_ASSERT_EQUAL(0, status);
-  TEST_ASSERT_EQUAL_INT32_ARRAY(lSorted, arr, LARGE);
-  free(arr);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(max_max_sorted, array, len);
+  free(array);
 }
 
-TEST(Counting, TestCountingTamanhoFalha1)
+TEST(Counting, TestCountingArrayMinMin)
 {
-  len = sizeof(int) * TINY;
-  arr = (int *)malloc(len); 
-  memcpy(arr, tSorted, len);
-  status = sort(arr, TINY, (char *)"On", COUNTING);
+  len = sizeof(min_min_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, min_min_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
   
-  TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(min_min_sorted, array, len);
+  free(array);
 }
 
-TEST(Counting, TestCountingTamanhoFalha2)
+TEST(Counting, TestCountingArrayDuplicate)
 {
-  len = sizeof(int) * XLARGE;
-  arr = (int *)malloc(len); 
-  memcpy(arr, xlSorted, len);
-  status = sort(arr, XLARGE, (char *)"On", COUNTING);
+  len = sizeof(duplicate_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, duplicate_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
   
-  TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(duplicate_sorted, array, len);
+  free(array);
 }
 
-TEST(Counting, TestCountingTamanhoFalha3)
+TEST(Counting, TestCountingArrayOdd)
 {
-  len = sizeof(int) * XXLARGE;
-  arr = (int *)malloc(len); 
-  memcpy(arr, xxlSorted, len);
-  status = sort(arr, XXLARGE, (char *)"On", COUNTING);
+  len = sizeof(odd_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, odd_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
   
-  TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(odd_sorted, array, len);
+  free(array);
 }
 
-TEST(Counting, TestCountingTipoFalha1)
+TEST(Counting, TestCountingArrayEven)
 {
-  len = sizeof(int) * SMALL;
-  arr = (int *)malloc(len); 
-  memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, (char *)"on", COUNTING);
+  len = sizeof(even_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, even_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
   
-  TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(even_sorted, array, len);
+  free(array);
 }
 
-TEST(Counting, TestCountingTipoFalha2)
+TEST(Counting, TestCountingArrayNegative)
 {
-  len = sizeof(int) * SMALL;
-  arr = (int *)malloc(len); 
-  memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, (char *)"ON", COUNTING);
+  len = sizeof(negative_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, negative_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
   
-  TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(negative_sorted, array, len);
+  free(array);
 }
 
-TEST(Counting, TestCountingTipoFalha3)
+TEST(Counting, TestCountingArrayPositive)
 {
-  len = sizeof(int) * SMALL;
-  arr = (int *)malloc(len); 
-  memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, (char *)" ON ", COUNTING);
+  len = sizeof(positive_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, positive_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
   
-  TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(positive_sorted, array, len);
+  free(array);
 }
 
-TEST(Counting, TestCountingTipoFalha4)
+TEST(Counting, TestCountingArrayMixed)
 {
-  len = sizeof(int) * SMALL;
-  arr = (int *)malloc(len); 
-  memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, (char *)"on", COUNTING);
+  len = sizeof(mixed_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, mixed_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
   
-  TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(mixed_sorted, array, len);
+  free(array);
 }
 
-TEST(Counting, TestCountingTipoFalha5)
+TEST(Counting, TestCountingArrayOne)
 {
-  len = sizeof(int) * SMALL;
-  arr = (int *)malloc(len); 
-  memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, (char *)"On2", COUNTING);
+  len = sizeof(one_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, one_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
   
   TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(one_sorted, array, len);
+  free(array);
 }
 
-TEST(Counting, TestCountingTipoFalha6)
+TEST(Counting, TestCountingArrayUnsorted)
 {
-  len = sizeof(int) * SMALL;
-  arr = (int *)malloc(len); 
-  memcpy(arr, sUnsorted, len);
-  status = sort(arr, SMALL, (char *)"Onlogn", COUNTING);
+  len = sizeof(unsorted_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, unsorted_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
+  
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(unsorted_sorted, array, len);
+  free(array);
+}
+
+TEST(Counting, TestCountingArraySorted)
+{
+  len = sizeof(sorted_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, sorted_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
+  
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(sorted_sorted, array, len);
+  free(array);
+}
+
+TEST(Counting, TestCountingArrayAllOnes)
+{
+  len = sizeof(ones_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, ones_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
+  
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(ones_sorted, array, len);
+  free(array);
+}
+
+TEST(Counting, TestCountingArrayAllZeros)
+{
+  len = sizeof(zeros_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, zeros_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
+  
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(zeros_sorted, array, len);
+  free(array);
+}
+
+TEST(Counting, TestCountingArrayTwoZeros)
+{
+  len = sizeof(two_zeros_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, two_zeros_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
+  
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(two_zeros_sorted, array, len);
+  free(array);
+}
+
+TEST(Counting, TestCountingArrayTwoMax)
+{
+  len = sizeof(two_max_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, two_max_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
+  
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(two_max_sorted, array, len);
+  free(array);
+}
+
+TEST(Counting, TestCountingArrayTwoMin)
+{
+  len = sizeof(two_min_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, two_min_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
+  
+  TEST_ASSERT_EQUAL(0, status);
+  TEST_ASSERT_EQUAL_INT32_ARRAY(two_min_sorted, array, len);
+  free(array);
+}
+
+TEST(Counting, TestCountingArrayLarge)
+{
+  len = sizeof(large_array) / sizeof(int);
+  array = (int *)malloc(sizeof(int) * len);
+  memcpy(array, large_array, sizeof(int) * len);
+  status = sort(array, len, (char *)"On", COUNTING);
   
   TEST_ASSERT_EQUAL(1, status);
-  free(arr);
+  free(array);
 }
