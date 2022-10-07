@@ -30,7 +30,7 @@ void merge(TYPE A[], int p, int q, int r) {
     while (j < nR)    A[k++] = R[j++];
         
     free(L);
-    // free(R);
+    free(R);
 }
 void merge_sort(TYPE A[], int p, int r) {
     if(p < r) {
